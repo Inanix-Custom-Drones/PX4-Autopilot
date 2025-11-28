@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# board specific sensors init
+#------------------------------------------------------------------------------
+
+board_adc start
+
+# Internal SPI bus BMI270
+bmi270 -R 10 -b 1 -s start
+bmi270 -R 8 -b 4 -s start
+
+# Internal baro
+#bmp388 -b 1 -s start
+bmp388 -I start 
+# Internal mag
+bmm350 -I -a 0x14 start
+# External mag
