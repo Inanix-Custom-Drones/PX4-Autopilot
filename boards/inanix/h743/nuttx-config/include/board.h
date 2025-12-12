@@ -32,8 +32,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ************************************************************************************/
-#ifndef __NUTTX_CONFIG_MATEKH743SLIM_INCLUDE_BOARD_H
-#define __NUTTX_CONFIG_MATEKH743SLIM_INCLUDE_BOARD_H
+#ifndef __NUTTX_CONFIG_INANIXH743_INCLUDE_BOARD_H
+#define __NUTTX_CONFIG_INANIXH743_INCLUDE_BOARD_H
 
 /************************************************************************************
  * Included Files
@@ -74,7 +74,7 @@
 
 /* Main PLL Configuration.
  *
- * PLL source is HSE = 8,000,000
+ * PLL source is HSE = 25,000,000
  *
  * PLL_VCOx = (STM32_HSE_FREQUENCY / PLLM) * PLLN
  * Subject to:
@@ -95,11 +95,11 @@
 
 #define STM32_BOARD_USEHSE
 
-#define STM32_PLLCFG_PLLSRC      RCC_PLLCKSELR_PLLSRC_HSE
+//#define STM32_PLLCFG_PLLSRC      RCC_PLLCKSELR_PLLSRC_HSE
 
 /* PLL1, wide 4 - 8 MHz input, enable DIVP, DIVQ, DIVR
  *
- *   PLL1_VCO = (8,000,000 / 1) * 120 = 960 MHz
+ *   PLL1_VCO = (25,000,000 / 5) * 192 = 960 MHz
  *
  *   PLL1P = PLL1_VCO/2  = 960 MHz / 2   = 480 MHz
  *   PLL1Q = PLL1_VCO/4  = 960 MHz / 4   = 240 MHz
@@ -111,18 +111,25 @@
 				 RCC_PLLCFGR_DIVP1EN | \
 				 RCC_PLLCFGR_DIVQ1EN | \
 				 RCC_PLLCFGR_DIVR1EN)
-#define STM32_PLLCFG_PLL1M       RCC_PLLCKSELR_DIVM1(2)
-#define STM32_PLLCFG_PLL1N       RCC_PLL1DIVR_N1(80)
+#define STM32_PLLCFG_PLL1M       RCC_PLLCKSELR_DIVM1(5)
+#define STM32_PLLCFG_PLL1N       RCC_PLL1DIVR_N1(192)
 #define STM32_PLLCFG_PLL1P       RCC_PLL1DIVR_P1(2)
 #define STM32_PLLCFG_PLL1Q       RCC_PLL1DIVR_Q1(4)
 #define STM32_PLLCFG_PLL1R       RCC_PLL1DIVR_R1(8)
 
-#define STM32_VCO1_FREQUENCY     ((STM32_HSE_FREQUENCY / 2) * 80)
+#define STM32_VCO1_FREQUENCY     ((STM32_HSE_FREQUENCY / 5) * 192)
 #define STM32_PLL1P_FREQUENCY    (STM32_VCO1_FREQUENCY / 2)
 #define STM32_PLL1Q_FREQUENCY    (STM32_VCO1_FREQUENCY / 4)
 #define STM32_PLL1R_FREQUENCY    (STM32_VCO1_FREQUENCY / 8)
 
-/* PLL2 */
+/* PLL2, wide 4 - 8 MHz input, enable DIVP, DIVQ, DIVR
+ *
+ *   PLL1_VCO = (25,000,000 / 4) * 32 = 200 MHz
+ *
+ *   PLL2P = PLL1_VCO/2  = 192 MHz / 2   = 100 MHz
+ *   PLL2Q = PLL1_VCO/2  = 192 MHz / 2   = 100 MHz
+ *   PLL2R = PLL1_VCO/2  = 192 MHz / 2   = 100 MHz
+ */
 
 #define STM32_PLLCFG_PLL2CFG     (RCC_PLLCFGR_PLL2VCOSEL_WIDE | \
 				  RCC_PLLCFGR_PLL2RGE_4_8_MHZ | \
@@ -140,21 +147,31 @@
 #define STM32_PLL2Q_FREQUENCY    (STM32_VCO2_FREQUENCY / 2)
 #define STM32_PLL2R_FREQUENCY    (STM32_VCO2_FREQUENCY / 2)
 
-/* PLL3 */
+/* PLL3, wide 4 - 8 MHz input, enable DIVP, DIVQ, DIVR
+ *
+ *   PLL3_VCO = (25,000,000 / 5) * 48 = 240 MHz
+ *
+ *   PLL2P = PLL1_VCO/2  = 240 MHz / 2   = 120 MHz
+ *   PLL2Q = PLL1_VCO/5  = 240 MHz / 5   = 48 MHz
+ *   PLL2R = PLL1_VCO/2  = 240 MHz / 8   = 30 MHz
+ */
+
+
 
 #define STM32_PLLCFG_PLL3CFG    (RCC_PLLCFGR_PLL3VCOSEL_WIDE | \
 				 RCC_PLLCFGR_PLL3RGE_4_8_MHZ | \
 				 RCC_PLLCFGR_DIVQ3EN)
-#define STM32_PLLCFG_PLL3M      RCC_PLLCKSELR_DIVM3(4)
-#define STM32_PLLCFG_PLL3N      RCC_PLL3DIVR_N3(32)
+#define STM32_PLLCFG_PLL3M      RCC_PLLCKSELR_DIVM3(5)
+#define STM32_PLLCFG_PLL3N      RCC_PLL3DIVR_N3(48)
 #define STM32_PLLCFG_PLL3P      RCC_PLL3DIVR_P3(2)
-#define STM32_PLLCFG_PLL3Q      RCC_PLL3DIVR_Q3(4)
-#define STM32_PLLCFG_PLL3R      RCC_PLL3DIVR_R3(2)
+#define STM32_PLLCFG_PLL3Q      RCC_PLL3DIVR_Q3(5)
+#define STM32_PLLCFG_PLL3R      RCC_PLL3DIVR_R3(8)
 
-#define STM32_VCO3_FREQUENCY    ((STM32_HSE_FREQUENCY / 4) * 32)
+#define STM32_VCO3_FREQUENCY    ((STM32_HSE_FREQUENCY / 5) * 48)
 #define STM32_PLL3P_FREQUENCY   (STM32_VCO3_FREQUENCY / 2)
-#define STM32_PLL3Q_FREQUENCY   (STM32_VCO3_FREQUENCY / 4)
-#define STM32_PLL3R_FREQUENCY   (STM32_VCO3_FREQUENCY / 2)
+#define STM32_PLL3Q_FREQUENCY   (STM32_VCO3_FREQUENCY / 5)
+//#define STM32_PLL3Q_FREQUENCY   ((STM32_VCO3_FREQUENCY / 25)*6)
+#define STM32_PLL3R_FREQUENCY   (STM32_VCO3_FREQUENCY / 8)
 
 /* SYSCLK = PLL1P = 480MHz
  * CPUCLK = SYSCLK / 1 = 480 MHz
@@ -362,13 +379,9 @@
 #define GPIO_UART4_RX    GPIO_UART4_RX_3    /* PB8  */
 #define GPIO_UART4_TX    GPIO_UART4_TX_3    /* PB9  */
 
-#define GPIO_USART6_RX   GPIO_USART6_RX_1   /* PC7  */
-#define GPIO_USART6_TX   GPIO_USART6_TX_1   /* PC6  */
 
 #define GPIO_UART7_RX    GPIO_UART7_RX_3    /* PE7  */
 #define GPIO_UART7_TX    GPIO_UART7_TX_3    /* PE8  */
-#define GPIO_UART7_RTS   GPIO_UART7_RTS_1   /* PE9  */
-#define GPIO_UART7_CTS   GPIO_UART7_CTS_1   /* PE10 */
 
 #define GPIO_UART8_RX    GPIO_UART8_RX_1    /* PE0  */
 #define GPIO_UART8_TX    GPIO_UART8_TX_1    /* PE1  */
@@ -402,7 +415,7 @@
 
 #define GPIO_SPI3_MISO   GPIO_SPI3_MISO_1               /* PB4  */
 #define GPIO_SPI3_MOSI   GPIO_SPI3_MOSI_4               /* PB5  */
-#define GPIO_SPI3_SCK    ADJ_SLEW_RATE(GPIO_SPI3_SCK_1) /* PB3  */
+#define GPIO_SPI3_SCK    GPIO_SPI3_SCK_1 /* PB3  */
 
 #define GPIO_SPI4_MISO   GPIO_SPI4_MISO_1               /* PE13 */
 #define GPIO_SPI4_MOSI   GPIO_SPI4_MOSI_1               /* PE14 */
@@ -452,42 +465,11 @@
  *      OTG_FS_DP                           PA12
  *      VBUS                                PA9
  */
-
+#define BOARD_USB_VBUS_SENSE_DISABLED
 
 /* Board provides GPIO or other Hardware for signaling to timing analyzer */
-
-#if defined(CONFIG_BOARD_USE_PROBES)
-# include "stm32_gpio.h"
-# define PROBE_N(n) (1<<((n)-1))
-# define PROBE_1    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTI|GPIO_PIN0)   /* PI0 AUX1 */
-# define PROBE_2    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN12)  /* PH12 AUX2 */
-# define PROBE_3    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN11)  /* PH11 AUX3 */
-# define PROBE_4    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN10)  /* PH10 AUX4 */
-# define PROBE_5    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTD|GPIO_PIN13)  /* PD13 AUX5 */
-# define PROBE_6    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTD|GPIO_PIN14)  /* PD14 AUX6 */
-# define PROBE_7    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN6)   /* PH6  AUX7 */
-# define PROBE_8    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTH|GPIO_PIN9)   /* PH9  AUX8 */
-# define PROBE_9    (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTE|GPIO_PIN11)  /* PE11  CAP1 */
-
-# define PROBE_INIT(mask) \
-	do { \
-		if ((mask)& PROBE_N(1)) { stm32_configgpio(PROBE_1); } \
-		if ((mask)& PROBE_N(2)) { stm32_configgpio(PROBE_2); } \
-		if ((mask)& PROBE_N(3)) { stm32_configgpio(PROBE_3); } \
-		if ((mask)& PROBE_N(4)) { stm32_configgpio(PROBE_4); } \
-		if ((mask)& PROBE_N(5)) { stm32_configgpio(PROBE_5); } \
-		if ((mask)& PROBE_N(6)) { stm32_configgpio(PROBE_6); } \
-		if ((mask)& PROBE_N(7)) { stm32_configgpio(PROBE_7); } \
-		if ((mask)& PROBE_N(8)) { stm32_configgpio(PROBE_8); } \
-		if ((mask)& PROBE_N(9)) { stm32_configgpio(PROBE_9); } \
-	} while(0)
-
-# define PROBE(n,s)  do {stm32_gpiowrite(PROBE_##n,(s));}while(0)
-# define PROBE_MARK(n) PROBE(n,false);PROBE(n,true)
-#else
 # define PROBE_INIT(mask)
 # define PROBE(n,s)
 # define PROBE_MARK(n)
-#endif
 
 #endif  /*__NUTTX_CONFIG_MATEKH743SLIM_INCLUDE_BOARD_H  */

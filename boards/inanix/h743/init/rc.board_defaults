@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# board specific defaults
+#------------------------------------------------------------------------------
+# system_power unavailable
+param set-default CBRK_SUPPLY_CHK 894281
+param set-default BAT1_I_CHANNEL 11
+param set-default BAT1_V_CHANNEL 10
+param set-default BAT1_A_PER_V 3.5
+param set-default BAT1_V_DIV 8.4
+#param set-default SER_TEL3_BAUD 57600 
+
+# Store missions in RAM
+param set-default SYS_DM_BACKEND 1
+
+# Ignore that there is no SD card
+param set-default COM_ARM_SDCARD 0
+
+# Disable logging
+param set-default SDLOG_BACKEND 0
+

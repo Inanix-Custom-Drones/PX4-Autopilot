@@ -95,8 +95,8 @@
 
 
 /* Define Battery Voltage Divider and A per V */
-#define BOARD_BATTERY1_V_DIV         (11.0f)     /* measured with the provided PM board */
-#define BOARD_BATTERY1_A_PER_V       (40.0f)
+#define BOARD_BATTERY1_V_DIV         (8.4f)     /* measured with the provided PM board */
+#define BOARD_BATTERY1_A_PER_V       (3.5f)
 
 
 /* CAN Silence
@@ -138,9 +138,12 @@
  * PE2  OTG_FS_VBUS VBUS sensing
  */
 
-//#define GPIO_OTGFS_VBUS         /* PA8 */ (GPIO_INPUT|GPIO_FLOAT|GPIO_SPEED_100MHz|GPIO_OPENDRAIN|GPIO_PORTA|GPIO_PIN8)
-#define BOARD_USB_VBUS_SENSE_DISABLED
-
+#define GPIO_OTGFS_VBUS         /* PA8 */ (GPIO_INPUT|GPIO_FLOAT|GPIO_SPEED_100MHz|GPIO_OPENDRAIN|GPIO_PORTA|GPIO_PIN8)
+#ifdef BOARD_USB_VBUS_SENSE_DISABLED
+	#undef BOARD_USB_VBUS_SENSE_DISABLED
+#endif
+#define BOARD_USB_VBUS_SENSE_DISABLED 1
+//#define GPIO_OTGFS_VBUS (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTA|GPIO_PIN8)
 /* High-resolution timer */
 #define HRT_TIMER               2  /* use timer8 for the HRT */
 #define HRT_TIMER_CHANNEL       1  /* use capture/compare channel 3 */
@@ -161,7 +164,7 @@
 #define BOARD_DMA_ALLOC_POOL_SIZE 5120
 
 /* This board provides the board_on_reset interface */
-#define BOARD_HAS_ON_RESET 0
+#define BOARD_HAS_ON_RESET 1
 
 
 #define PX4_GPIO_INIT_LIST { \
@@ -177,7 +180,7 @@
 #define BOARD_ENABLE_CONSOLE_BUFFER
 
 #define BOARD_NUM_IO_TIMERS 4
-
+#define FLASH_BASED_PARAMS 1
 
 __BEGIN_DECLS
 

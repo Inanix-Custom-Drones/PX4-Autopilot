@@ -59,6 +59,7 @@ __EXPORT void stm32_usbinitialize(void)
 
 #ifdef CONFIG_STM32F7_OTGFS
 	stm32_configgpio(GPIO_OTGFS_VBUS);
+//	#define BOARD_USB_VBUS_SENSE_DISABLED
 #endif
 }
 
