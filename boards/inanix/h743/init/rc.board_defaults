@@ -2,6 +2,21 @@
 #
 # board specific defaults
 #------------------------------------------------------------------------------
+
+# transision from params file to flash-based params (2022-08)
+if [ -f $PARAM_FILE ]
+then
+	param load $PARAM_FILE
+	param save
+	# create a backup
+	mv $PARAM_FILE ${PARAM_FILE}.bak
+	reboot
+fi
+
+
+# Select the Generic 250 Racer by default
+param set-default SYS_AUTOSTART 4050
+
 # system_power unavailable
 param set-default CBRK_SUPPLY_CHK 894281
 param set-default BAT1_I_CHANNEL 11

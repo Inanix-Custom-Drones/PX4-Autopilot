@@ -54,6 +54,9 @@
  ****************************************************************************************************/
 
 // #define FLASH_BASED_PARAMS
+//#  define BOARD_HAS_USB_VALID           1
+//#  define BOARD_HAS_NBAT_V              1
+//#  define BOARD_HAS_NBAT_I              1
 
 
 /* LEDs are driven with push open drain to support Anode to 5V or 3.3V */
@@ -143,7 +146,7 @@
 	#undef BOARD_USB_VBUS_SENSE_DISABLED
 #endif
 #define BOARD_USB_VBUS_SENSE_DISABLED 1
-//#define GPIO_OTGFS_VBUS (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTA|GPIO_PIN8)
+//#define GPIO_OTGFS_VBUS (GPIO_INPUT|GPIO_PULLUP|GPIO_SPEED_100MHz|GPIO_PORTA|GPIO_PIN8)
 /* High-resolution timer */
 #define HRT_TIMER               2  /* use timer8 for the HRT */
 #define HRT_TIMER_CHANNEL       1  /* use capture/compare channel 3 */

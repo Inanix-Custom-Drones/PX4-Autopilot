@@ -4,7 +4,7 @@
     "description": "Firmware for the InanixH743v1 boards",
     "image": "",
     "build_time": 0,
-    "summary": "InanixH743v2",
+    "summary": "InanixH743v1",
     "version": "0.1",
     "image_size": 0,
     "image_maxsize": 1966080,
