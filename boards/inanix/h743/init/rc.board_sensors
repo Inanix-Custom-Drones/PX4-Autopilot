@@ -8,10 +8,15 @@ board_adc start
 # Internal SPI bus BMI270
 bmi270 -R 10 -b 1 -s start
 bmi270 -R 8 -b 4 -s start
+icm20948 -s -b 1 -R 8 -M start
+icm20948 -s -b 4 -R 14 -M start
+
 
 # Internal baro
 #bmp388 -b 1 -s start
-bmp388 -I start 
+bmp388 -I start
+bmp581 -b 1 -s start
+bmp581 -I start
 # Internal mag
-bmm350 -I -a 0x14 start
+#bmm350 -I -a 0x14 start
 # External mag
