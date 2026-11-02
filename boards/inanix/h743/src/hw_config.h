@@ -103,7 +103,7 @@
 #define APP_RESERVATION_SIZE           (1*128*1024)
 //#define BOARD_FLASH_SIZE               (_FLASH_KBYTES * 1024)
 
-#define OSC_FREQ                       25
+#define OSC_FREQ                       24
 
 #define BOARD_PIN_LED_ACTIVITY         GPIO_nLED_BLUE // BLUE
 #define BOARD_PIN_LED_BOOTLOADER       GPIO_nLED_GREEN // GREEN
